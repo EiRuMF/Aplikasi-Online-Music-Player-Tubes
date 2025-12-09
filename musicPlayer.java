@@ -51,13 +51,7 @@ public class musicPlayer{
         banyakPlaylist
 
         banyakPlaylist++;
-
-
       }
-
-
-
-
   }
 
   static void tampilkanPlaylist(String tambahPlaylist){
