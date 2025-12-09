@@ -2,15 +2,38 @@ import java.util.Scanner;
 
 public class musicPlayer{
 
-  static Scanner input = new Scanner(System.in);
-
 
     
    static String music[][] = new String [1000][4];
    String playlist[] = new String [10];
    static int indexMusic =0;
 
-  static void tambahMusic(String judul,String artis,String durasi,String album){
+   static void tambahMusic(String judul,String artis,String durasi,String album){
+    
+    
+    music[indexMusic][0]=judul;
+    music[indexMusic][1]=artis;
+    music[indexMusic][2]=durasi;
+    music[indexMusic][3]=album;
+    indexMusic++;
+    
+  }
+
+  static void tampilkanMusic(){
+    if(indexMusic==0){
+      System.out.println("Belum ada musik");
+    }else{
+      for(int i=0;i<indexMusic;i++){
+        System.out.println(music[i][0]+"|"+music[i][1]+"|"+music[i][2]+"|"+music[i][3]);
+      }
+    }
+  }
+
+  static void editDataMusic(String tambahMusic){
+
+  }
+
+  static void hapusDataMusic(String tambahMusic){
 
   }
 
@@ -24,7 +47,9 @@ public class musicPlayer{
         System.out.println("Masukkan nama playlist: ");
         String addNamaPlaylist = input.nextString();
 
-        namaPlaylist[jumlahPlaylist] = nama;
+        namaPlaylist[banyakPlaylist] = nama;
+        banyakPlaylist
+
         banyakPlaylist++;
 
 
