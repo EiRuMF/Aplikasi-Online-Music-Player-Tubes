@@ -2,42 +2,36 @@ import java.util.Scanner;
 
 public class musicPlayer{
 
+  static Scanner input = new Scanner(System.in);
+
 
     
    static String music[][] = new String [1000][4];
-   String playlist[] = new String [1000];
+   String playlist[] = new String [10];
    static int indexMusic =0;
 
-   static void tambahMusic(String judul,String artis,String durasi,String album){
-    
-    
-    music[indexMusic][0]=judul;
-    music[indexMusic][1]=artis;
-    music[indexMusic][2]=durasi;
-    music[indexMusic][3]=album;
-    indexMusic++;
-    
-  }
-
-  static void tampilkanMusic(){
-    if(indexMusic==0){
-      System.out.println("Belum ada musik");
-    }else{
-      for(int i=0;i<indexMusic;i++){
-        System.out.println(music[i][0]+"|"+music[i][1]+"|"+music[i][2]+"|"+music[i][3]);
-      }
-    }
-  }
-
-  static void editDataMusic(String tambahMusic){
+  static void tambahMusic(String judul,String artis,String durasi,String album){
 
   }
 
-  static void hapusDataMusic(String tambahMusic){
-
-  }
+  // Bagian Playlist
 
   static void tambahPlaylist(String music){
+      if (banyakPlaylist <= 10){
+        System.out.println("Playlist Penuh");
+        return;
+      } else {
+        System.out.println("Masukkan nama playlist: ");
+        String addNamaPlaylist = input.nextString();
+
+        namaPlaylist[jumlahPlaylist] = nama;
+        banyakPlaylist++;
+
+
+      }
+
+
+
 
   }
 
@@ -82,17 +76,22 @@ public class musicPlayer{
   
 
   public static void main(String [] args){
-      Scanner in = new Scanner(System.in);
+     
 
       int pilihan = 0;
 
       do{
-        System.out.println("ONLINE MUSIC PLAYER");
+        System.out.println("==ONLINE MUSIC PLAYER==");
         System.out.println("1. Lihat semua musik");
         System.out.println("2. Cari musik");
         System.out.println("3. Tambah musik");
+        System.out.println("4. Hapus musik");
         pilihan = in.nextInt();
-        break;
+
+        if(pilihan == 1){
+          musicList(music);
+        }
+        
       }
       while (pilihan != 0); {
         System.out.println("Keluar dari aplikasi");
