@@ -2,27 +2,47 @@ import java.util.Scanner;
 
 public class musicPlayer {
 
+  static String music[][] = new String[1000][4];
+  String playlist[] = new String[10];
+  static int indexMusic = 0;
   static Scanner input = new Scanner(System.in);
 
-  String music[] = new String[1000];
-  String 
-
-  // PlayList
-  String playlist[] = new String[];
-  int banyakPlaylist = 0;
+  // cari musik
   int jumlahMusic = 0;
 
-  static void tambahMusic(String judul,String artis,String durasi,String album){
-   
-    
-    music[indexMusic][0]=judul;
-    music[indexMusic][1]=artis;
-    music[indexMusic][2]=durasi;
-    music[indexMusic][3]=album;
+  // PlayList
+  int banyakPlaylist = 0;
+
+
+  //Bagian musik
+
+  static void tambahMusic(String judul, String artis, String durasi, String album) {
+
+    music[indexMusic][0] = judul;
+    music[indexMusic][1] = artis;
+    music[indexMusic][2] = durasi;
+    music[indexMusic][3] = album;
     indexMusic++;
-    
+
   }
 
+  static void tampilkanMusic() {
+    if (indexMusic == 0) {
+      System.out.println("Belum ada musik");
+    } else {
+      for (int i = 0; i < indexMusic; i++) {
+        System.out.println(music[i][0] + "|" + music[i][1] + "|" + music[i][2] + "|" + music[i][3]);
+      }
+    }
+  }
+
+  static void editDataMusic(String tambahMusic) {
+
+  }
+
+  static void hapusDataMusic(String tambahMusic){
+
+  
 
   // Bagian Playlist
 
@@ -34,17 +54,31 @@ public class musicPlayer {
       System.out.println("Masukkan nama playlist: ");
       String addNamaPlaylist = input.nextString();
 
+        namaPlaylist[banyakPlaylist] = nama;
+        banyakPlaylist
+
+        banyakPlaylist++;
       namaPlaylist[jumlahPlaylist] = nama;
-      banyakPlaylist
       banyakPlaylist++;
 
-    }
+
+      }
+
+
+
+
+  }
+
+  static void tampilkanPlaylist(String tambahPlaylist) {
+
+  }
 
   }
 
   public void cariMusik() {
-    System.out.println("\n=== CARI MUSIK ===");
+    System.out.println("\n=== CARI MUSIK (OOP) ===");
     System.out.print("Masukkan kata kunci (judul/artis/album): ");
+
     if (input.hasNextLine()) {
       input.nextLine();
     }
@@ -77,23 +111,21 @@ public class musicPlayer {
 
   }
 
-  static void editDataMusic(String tambahMusic) {
+  
+
+
+
+  static void play(String music){
+
+  
+
+  static void shufflePlay(String rekomendasi){
+
+  static void tampilkanMusic(String tambahMusic) {
 
   }
 
-  static void hapusDataMusic(String tambahMusic) {
-
-  }
-
-  static void tampilkanMusic(){
-    if(indexMusic==0){
-      System.out.println("Belum ada musik");
-    }else{
-      for(int i=0;i<indexMusic;i++){
-        System.out.println(music[i][0]+"|"+music[i][1]+"|"+music[i][2]+"|"+music[i][3]);
-      }
-    }
-  }
+  static void rekomendasiMusic(String tampilkanPlaylist){
 
   static void tampilkanPlaylist(String tambahPlaylist) {
 
