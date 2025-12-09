@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class MusicPlayer{
 
-  // String music[] = new music[];
+  // Method Tambah 
 
   static void musicList(String music){
     System.out.println("Daftar music");
@@ -23,7 +23,11 @@ public class MusicPlayer{
         System.out.println("2. Cari musik");
         System.out.println("3. Tambah musik");
         pilihan = in.nextInt();
-        break;
+
+        if(pilihan == 1){
+          musicList(music);
+        }
+        
       }
       while (pilihan != 0); {
         System.out.println("Keluar dari aplikasi");
