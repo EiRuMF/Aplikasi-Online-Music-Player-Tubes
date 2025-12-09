@@ -5,7 +5,7 @@ public class musicPlayer{
 
     
    static String music[][] = new String [1000][4];
-   String playlist[][] = new String [1000][4];
+   String playlist[] = new String [1000];
    static int indexMusic =0;
 
    static void tambahMusic(String judul,String artis,String durasi,String album){
