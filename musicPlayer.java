@@ -2,14 +2,38 @@ import java.util.Scanner;
 
 public class musicPlayer{
 
+  static Scanner input = new Scanner(System.in);
+
    String music[] = new String [1000];
+
+
+  //  PlayList
+   String playlist[] = new String[];
+   int banyakPlaylist = 0;
 
   static void tambahMusic(String judul,String artis,String durasi,String album){
 
   }
 
-  static void tambahMusicPlaylist(String music){
-      String
+  // Bagian Playlist
+
+  static void tambahPlaylist(String music){
+      if (banyakPlaylist <= 10){
+        System.out.println("Playlist Penuh");
+        return;
+      } else {
+        System.out.println("Masukkan nama playlist: ");
+        String addNamaPlaylist = input.nextString();
+
+        namaPlaylist[jumlahPlaylist] = nama;
+        banyakPlaylist++;
+
+
+      }
+
+
+
+
   }
 
   static void cariData(String tambahMusic){
@@ -41,7 +65,7 @@ public class musicPlayer{
   }
 
   public static void main(String [] args){
-      Scanner in = new Scanner(System.in);
+     
 
       int pilihan = 0;
 
