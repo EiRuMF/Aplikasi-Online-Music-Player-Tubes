@@ -1,15 +1,43 @@
 import java.util.Scanner;
 
-public class MusicPlayer{
+public class musicPlayer{
 
-  // String music[] = new music[];
+   String music[] = new String [1000];
 
-  static void musicList(String music){
-    System.out.println("Daftar music");
+  static void tambahMusic(String judul,String artis,String durasi,String album){
+
   }
-  
-  static void musicJudul(String judul){
-    
+
+  static void tambahPlaylist(String music){
+
+  }
+
+  static void cariData(String tambahMusic){
+
+  }
+
+  static void editDataPlaylist(String tambahPlaylist){
+
+  }
+
+  static void hapusDataPlaylist(String tambahPlaylist){
+
+  }
+
+  static void editDataMusic(String tambahMusic){
+
+  }
+
+  static void hapusDataMusic(String tambahMusic){
+
+  }
+
+  static void tampilkanMusic(String tambahMusic){
+
+  }
+
+  static void tampilkanPlaylist(String tambahPlaylist){
+
   }
 
   public static void main(String [] args){
@@ -29,7 +57,7 @@ public class MusicPlayer{
         System.out.println("Keluar dari aplikasi");
       }
 
-      
+     
     
       
 
