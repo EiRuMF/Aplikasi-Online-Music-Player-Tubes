@@ -25,7 +25,9 @@ public class musicPlayer{
         System.out.println("Masukkan nama playlist: ");
         String addNamaPlaylist = input.nextString();
 
-        namaPlaylist[jumlahPlaylist] = nama;
+        namaPlaylist[banyakPlaylist] = nama;
+        banyakPlaylist
+
         banyakPlaylist++;
 
 
