@@ -8,8 +8,19 @@ public class musicPlayer{
 
   }
 
+  static void tambahMusicPlaylist(String music){
+      String
+  }
 
   static void cariData(String tambahMusic){
+
+  }
+
+  static void editDataPlaylist(String tambahPlaylist){
+
+  }
+
+  static void hapusDataPlaylist(String tambahPlaylist){
 
   }
 
