@@ -75,6 +75,15 @@ public class musicPlayer {
 
   }
 
+  
+  static void editDataPlaylist(String tambahPlaylist) {
+
+  }
+
+  static void hapusDataPlaylist(String tambahPlaylist) {
+
+  }
+
   public void cariMusik() {
     System.out.println("\n=== CARI MUSIK (OOP) ===");
     System.out.print("Masukkan kata kunci (judul/artis/album): ");
@@ -102,36 +111,15 @@ public class musicPlayer {
       System.out.println("Musik dengan kata kunci '" + keyword + "' tidak ditemukan.");
     }
   }
-
-  static void editDataPlaylist(String tambahPlaylist) {
-
-  }
-
-  static void hapusDataPlaylist(String tambahPlaylist) {
-
-  }
-
   
-
-
-
   static void play(String music){
-
-  
 
   static void shufflePlay(String rekomendasi){
 
-  static void tampilkanMusic(String tambahMusic) {
-
-  }
 
   static void rekomendasiMusic(String tampilkanPlaylist){
 
-  static void tampilkanPlaylist(String tambahPlaylist) {
-
-  }
-
-
+  
 
 
 
