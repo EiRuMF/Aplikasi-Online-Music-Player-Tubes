@@ -10,6 +10,7 @@ public class musicPlayer {
   int jumlahMusic = 0;
 
   // PlayList
+  String playlist[] = new String[10];
   int banyakPlaylist = 0;
 
 
@@ -72,20 +73,11 @@ public class musicPlayer {
       System.out.println("Masukkan nama playlist: ");
       String addNamaPlaylist = input.nextString();
 
-        namaPlaylist[banyakPlaylist] = nama;
-        banyakPlaylist
-
-        banyakPlaylist++;
-      namaPlaylist[jumlahPlaylist] = nama;
+      playlist[banyakPlaylist] = nama;
       banyakPlaylist++;
-      }
-  }
 
-  static void tampilkanPlaylist(String tambahPlaylist) {
-  }
-  
-  static void editDataPlaylist(String tambahPlaylist) {
-  }
+      System.out.println("Playlist \"" + nama + "\" berhasil ditambahkan!\n");
+    }
 
   static void hapusDataPlaylist(String tambahPlaylist) {
   }
