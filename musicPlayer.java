@@ -7,7 +7,7 @@ public class musicPlayer {
   String music[] = new String[1000];
 
   // PlayList
-  String playlist[] = new String[];
+  String playlist[] = new String[10];
   int banyakPlaylist = 0;
   int jumlahMusic = 0;
 
@@ -25,10 +25,10 @@ public class musicPlayer {
       System.out.println("Masukkan nama playlist: ");
       String addNamaPlaylist = input.nextString();
 
-      namaPlaylist[jumlahPlaylist] = nama;
-      banyakPlaylist
+      playlist[banyakPlaylist] = nama;
       banyakPlaylist++;
 
+      System.out.println("Playlist \"" + nama + "\" berhasil ditambahkan!\n");
     }
 
   }
