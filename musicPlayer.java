@@ -7,10 +7,9 @@ public class musicPlayer {
   static Scanner input = new Scanner(System.in);
 
   // cari musik
-  int jumlahMusic = 0;
+  static int jumlahMusic = 0;
 
   // PlayList
-  String playlist[] = new String[10];
   int banyakPlaylist = 0;
 
 
