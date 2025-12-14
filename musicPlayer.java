@@ -6,22 +6,24 @@ public class musicPlayer {
   static Scanner input = new Scanner(System.in);
 
   // cari musik
-  int jumlahMusic = 0;
+  static int jumlahMusic = 0;
 
   // PlayList
-  String playlist[] = new String[10];
-  int banyakPlaylist = 0;
-  int jumlahMusic = 0;
+  static String playlist[] = new String[10];
+  static int playlistMusic[][] = new int[10][50];
+  static int jumlahMusicPlaylist[] = new int[10];
+  static int banyakPlaylist = 0;
+  
 
 
   //Bagian musik
 
   static void tambahMusic(String judul, String artis, String durasi, String album) {
-
-    music[indexMusic][0] = judul;
-    music[indexMusic][1] = artis;
-    music[indexMusic][2] = durasi;
-    music[indexMusic][3] = album;
+	  
+    music[jumlahMusic][0] = judul;
+    music[jumlahMusic][1] = artis;
+    music[jumlahMusic][2] = durasi;
+    music[jumlahMusic][3] = album;
     jumlahMusic++;
 
   }
@@ -36,17 +38,15 @@ public class musicPlayer {
     }
   }
 
-  static void editDataMusic(int nomorMusic,int pilihan,String edit) {
-	  if(pilihan ==1) {
+  static void editDataMusic(int nomorMusic,int pilihanNomorEdit,String edit) {
+	  if(pilihanNomorEdit ==1) {
 		  music[nomorMusic][0]=edit;
-	  }else if(pilihan ==2) {
+	  }else if(pilihanNomorEdit ==2) {
 		  music[nomorMusic][1]=edit;
-	  }else if(pilihan ==3) {
+	  }else if(pilihanNomorEdit ==3) {
 		  music[nomorMusic][2]=edit;
-	  }else if(pilihan ==4) {
+	  }else if(pilihanNomorEdit ==4) {
 		  music[nomorMusic][3]=edit;
-	  }else {
-		  System.out.println("Anda memasukkan nomor yang salah ");
 	  }   
   }
 
@@ -65,90 +65,77 @@ public class musicPlayer {
 
   // Bagian Playlist
 
-  static void tambahPlaylist(String music) {
+  static void tambahPlaylist() {
     if (banyakPlaylist >= 10) {
       System.out.println("Playlist Penuh");
       return;
     } else {
       System.out.println("Masukkan nama playlist: ");
-      String nama = input.nextString();
+      String nama = input.nextLine();
 
       playlist[banyakPlaylist] = nama;
       banyakPlaylist++;
 
-      System.out.println("Playlist \"+ nama + \" berhasil ditambahkan!\n");
-      }
-  }
-
-  static void tampilkanPlaylist(String tambahPlaylist) {
-  }
-  
-  static void editDataPlaylist(String tambahPlaylist) {
-  }
-
-  static void hapusDataPlaylist(String tambahPlaylist) {
-  }
-
-  public void cariMusik() {
-    System.out.println("\n=== CARI MUSIK (OOP) ===");
-    System.out.print("Masukkan kata kunci (judul/artis/album): ");
-
-    if (input.hasNextLine()) {
-      input.nextLine();
-    }
-    String keyword = input.nextLine().trim().toLowerCase();
-
-    boolean ditemukan = false;
-
-    for (int i = 0; i < jumlahMusic; i++) {
-      Music m = music[i];
-
-      if (m.judul.toLowerCase().contains(keyword) ||
-          m.artis.toLowerCase().contains(keyword) ||
-          m.album.toLowerCase().contains(keyword)) {
-        System.out.println("--- Ditemukan! ---");
-        System.out.println((i + 1) + ". " + m.toString());
-        ditemukan = true;
-      }
-    }
-
-    if (!ditemukan) {
-      System.out.println("Musik dengan kata kunci '" + keyword + "' tidak ditemukan.");
+      System.out.println("Playlist \"" + nama + "\" berhasil ditambahkan!\n");
     }
   }
+
+  static void tampilkanPlaylist(){
+    if(banyakPlaylist == 0){
+      System.out.println("Tidak ada playlist");
+      return;
+    }
+
+    for(int i = 0; i < banyakPlaylist; i++){
+      System.out.println((i + 1) + ". " + playlist[i] +
+      "(" + jumlahMusicPlaylist[i] + " lagu)");
+    }
+  }
+
+  //static void hapusDataPlaylist(String tambahPlaylist) {
+  //}
+
+  // public void cariMusik() {
+  //   System.out.println("\n=== CARI MUSIK (OOP) ===");
+  //   System.out.print("Masukkan kata kunci (judul/artis/album): ");
+
+  //   if (input.hasNextLine()) {
+  //     input.nextLine();
+  //   }
+  //   String keyword = input.nextLine().trim().toLowerCase();
+
+  //   boolean ditemukan = false;
+
+  //   for (int i = 0; i < jumlahMusic; i++) {
+  //     Music m = music[i];
+
+  //     if (m.judul.toLowerCase().contains(keyword) ||
+  //         m.artis.toLowerCase().contains(keyword) ||
+  //         m.album.toLowerCase().contains(keyword)) {
+  //       System.out.println("--- Ditemukan! ---");
+  //       System.out.println((i + 1) + ". " + m.toString());
+  //       ditemukan = true;
+  //     }
+  //   }
+
+  //   if (!ditemukan) {
+  //     System.out.println("Musik dengan kata kunci '" + keyword + "' tidak ditemukan.");
+  //   }
+  // }
   
-  static void play(String music){
-  }
+  // static void play(String music){
+  // }
 
-  static void shufflePlay(String rekomendasi){
-  }
+  // static void shufflePlay(String rekomendasi){
+  // }
 
-  static void rekomendasiMusic(String tampilkanPlaylist){
-  }
+  // static void rekomendasiMusic(String tampilkanPlaylist){
+  // }
   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   public static void main(String[] args) {
 
-		int pilihan=0;
+		int pilihan;
 	    do {
 	      System.out.println("  ");
 	      System.out.println("==ONLINE MUSIC PLAYER==");
@@ -158,6 +145,9 @@ public class musicPlayer {
 	      System.out.println("3. Tambah musik");
 	      System.out.println("4. Edit musik");
 	      System.out.println("5. Hapus musik");
+        System.out.println("6. Tambah playlist");
+        System.out.println("7. Tampilkan playlist");
+        System.out.println("8. Lihat isi playlist");
 	      pilihan = input.nextInt();
 	      input.nextLine();
 	      
@@ -178,30 +168,47 @@ public class musicPlayer {
 	      }else if(pilihan ==4) {
 	    	  tampilkanMusic();
 	    	  System.out.println("Pilih nomor musik : ");
-	    	  int nomor = input.nextInt()-1;
-	    	  System.out.println("1. Judul");
-	    	  System.out.println("2. Artis");
-	    	  System.out.println("3. Durasi");
-	    	  System.out.println("4. Album");
-	    	  
-	    	  System.out.println("Pilih yang ingin anda ubah : ");
-	    	  int nomorEdit = input.nextInt();
-	    	  input.nextLine();
-	    	  System.out.println("Masukkan perubahan : ");
-	    	  String ubah = input.nextLine();
-	    	  editDataMusic(nomor,nomorEdit , ubah);
+	    	  int nomorMusic = input.nextInt()-1;
+	    	  if(nomorMusic>=0 && nomorMusic < jumlahMusic) {
+		    	  System.out.println("1. Judul");
+		    	  System.out.println("2. Artis");
+		    	  System.out.println("3. Durasi");
+		    	  System.out.println("4. Album");
+		    	  
+		    	  System.out.println("Pilih yang ingin anda ubah : ");
+		    	  int nomorEdit = input.nextInt();
+		    	  input.nextLine();
+		    	  if(nomorEdit>0 && nomorEdit<=4) {
+			    	  System.out.println("Masukkan perubahan : ");
+			    	  String ubah = input.nextLine();
+			    	  editDataMusic(nomorMusic,nomorEdit , ubah);
+		    	  }else {
+		    		  System.out.println("Pilihan yang Anda masukkan salah");
+		    	  }  
+	    	  }else {
+	    		  System.out.println("Nomor musik yang anda masukkan salah");
+	    	  }
 	      }else if(pilihan ==5) {
 	    	  tampilkanMusic();
 	    	  System.out.println(" ");
-	    	  System.out.println("Pilih nomor musik mana yang anda ingin hapus : ");
-	    	  int hapus = input.nextInt()-1;
-	    	  hapusDataMusic(hapus);
-	      }
+	    	  if(jumlahMusic!=0) {
+		    	  System.out.println("Pilih nomor musik mana yang anda ingin hapus : ");
+			      int nomorMusicHapus = input.nextInt()-1;
+			      if(nomorMusicHapus>=0 && nomorMusicHapus<jumlahMusic) {
+			    	  hapusDataMusic(nomorMusicHapus);
+			      }else {
+			    	  System.out.println("Nomor musik yang Anda masukkan salah");
+			      }
+		      }
+	      } else if(pilihan == 6) {
+          tambahPlaylist();
+        } else if(pilihan == 7) {
+          tampilkanPlaylist();
+        }
 	        
 	    } while (pilihan !=0);
-	    {
+	    
 	      System.out.println("Keluar dari aplikasi");
-	    }
 
   }
 }
