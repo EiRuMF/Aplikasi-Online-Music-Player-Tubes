@@ -203,7 +203,7 @@ public class musicPlayer {
 	      } else if(pilihan == 6) {
           tambahPlaylist();
         } else if(pilihan == 7) {
-          tampilkanPlaylist();
+          tampilkan Playlist();
         }
 	        
 	    } while (pilihan !=0);
