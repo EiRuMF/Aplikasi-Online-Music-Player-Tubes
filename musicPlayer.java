@@ -191,11 +191,11 @@ public class musicPlayer {
       System.out.println("3. Tambah musik");
       System.out.println("4. Edit musik");
       System.out.println("5. Hapus musik");
-      System.out.println("6. ▶️ Putar Musik (Play)");
-      System.out.println("7. 🎲 Shuffle Play");
+      System.out.println("6. Putar Musik (Play)");
+      System.out.println("7. Shuffle Play");
       System.out.println("8. Tampilkan Playlist");
       System.out.println("9. Tambah Playlist");
-      System.out.println("10. ⭐ Rekomendasi Musik");
+      System.out.println("10. Rekomendasi Musik");
       System.out.print("Pilih menu: ");
 
       if (input.hasNextInt()) {
