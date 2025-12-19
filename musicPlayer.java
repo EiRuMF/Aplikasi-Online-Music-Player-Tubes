@@ -61,8 +61,6 @@ public class musicPlayer {
 	  jumlahMusic--;
   }
 
-  
-
   // Bagian Playlist
 
   static void tambahPlaylist() {
@@ -91,6 +89,82 @@ public class musicPlayer {
       "(" + jumlahMusicPlaylist[i] + " lagu)");
     }
   }
+
+  static void tambahMusicKePlaylist() {
+
+    if (banyakPlaylist == 0) {
+        System.out.println("Belum ada playlist");
+        return;
+    }
+
+    if (jumlahMusic == 0) {
+        System.out.println("Belum ada musik");
+        return;
+    }
+
+    tampilkanPlaylist();
+    System.out.print("Pilih playlist: ");
+    int p = input.nextInt() - 1;
+
+    if (p < 0 || p >= banyakPlaylist) {
+        System.out.println("Playlist tidak valid");
+        input.nextLine();
+        return;
+    }
+
+    tampilkanMusic();
+    System.out.print("Pilih musik: ");
+    int m = input.nextInt() - 1;
+
+    if (m < 0 || m >= jumlahMusic) {
+        System.out.println("Musik tidak valid");
+        input.nextLine();
+        return;
+    }
+
+      playlistMusic[p][jumlahMusicPlaylist[p]] = m;
+    jumlahMusicPlaylist[p]++;
+
+    input.nextLine();
+    System.out.println("Musik berhasil ditambahkan ke playlist");
+    }
+
+    static void lihatIsiPlaylist() {
+
+    if (banyakPlaylist == 0) {
+        System.out.println("Belum ada playlist");
+        return;
+    }
+
+    tampilkanPlaylist();
+    System.out.print("Pilih playlist: ");
+    int p = input.nextInt() - 1;
+
+    if (p < 0 || p >= banyakPlaylist) {
+        System.out.println("Playlist tidak valid");
+        input.nextLine();
+        return;
+    }
+
+    if (jumlahMusicPlaylist[p] == 0) {
+        System.out.println("Playlist masih kosong");
+        input.nextLine();
+        return;
+    }
+
+    System.out.println("Isi playlist \"" + playlist[p] + "\":");
+
+    for (int i = 0; i < jumlahMusicPlaylist[p]; i++) {
+        int idx = playlistMusic[p][i];
+        System.out.println((i + 1) + ". " +
+            music[idx][0] + " - " + music[idx][1]);
+    }
+
+    input.nextLine();
+}
+
+  
+  
 
   //static void hapusDataPlaylist(String tambahPlaylist) {
   //}
@@ -147,7 +221,8 @@ public class musicPlayer {
 	      System.out.println("5. Hapus musik");
         System.out.println("6. Tambah playlist");
         System.out.println("7. Tampilkan playlist");
-        System.out.println("8. Lihat isi playlist");
+        System.out.println("8. Tambah music ke playlist ");
+        System.out.println("9. Lihat isi playlist ");
 	      pilihan = input.nextInt();
 	      input.nextLine();
 	      
@@ -204,6 +279,8 @@ public class musicPlayer {
           tambahPlaylist();
         } else if(pilihan == 7) {
           tampilkanPlaylist();
+        } else if (pilihan == 8) {
+          tambahMusicKePlaylist();
         }
 	        
 	    } while (pilihan !=0);
