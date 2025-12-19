@@ -66,17 +66,19 @@ public class musicPlayer {
 
 
   static void tampilkanMusic() {
-    if (jumlahMusic == 0) {
-      System.out.println("Belum ada musik");
-    } else {
-      System.out.println("\n--- DAFTAR MUSIK ---");
-      for (int i = 0; i < jumlahMusic; i++) {
-        System.out.printf("%-3d %-20s %-20s %-7s %-20s\n",
-            (i + 1), music[i][0], music[i][1], music[i][2], music[i][3]);
-      }
-      System.out.println("--------------------");
-    }
-  }
+	    if (jumlahMusic == 0) {
+	        System.out.println("Belum ada musik");
+	    } else {
+	        System.out.println("\n--- DAFTAR MUSIK ---");
+	        System.out.printf("%-3s %-25s %-20s %-10s %-25s\n", "No", "Judul", "Artis", "Durasi", "Album");
+	        System.out.println("---------------------------------------------------------------------");
+	        for (int i = 0; i < jumlahMusic; i++) {
+	            System.out.printf("%-3d %-25s %-20s %-10s %-25s\n",
+	                    (i + 1), music[i][0], music[i][1], music[i][2], music[i][3]);
+	        }
+	        System.out.println("---------------------------------------------------------------------");
+	    }
+	}
 
   static void editDataMusic(int nomorMusic,int pilihanNomorEdit,String edit) {
 	  if(pilihanNomorEdit ==1) {
@@ -94,10 +96,10 @@ public class musicPlayer {
   static void hapusDataMusic(int nomorMusic) {
     String judulHapus = music[nomorMusic][0];
     for (int i = nomorMusic; i < jumlahMusic - 1; i++) {
-    	music[jumlahMusic - 1][0] = null;
-        music[jumlahMusic - 1][1] = null;
-        music[jumlahMusic - 1][2] = null;
-        music[jumlahMusic - 1][3] = null;
+    	  music[i][0]=music[i+1][0];
+		  music[i][1]=music[i+1][1];
+		  music[i][2]=music[i+1][2];
+		  music[i][3]=music[i+1][3];
 
     }
     
