@@ -19,22 +19,62 @@ public class musicPlayer {
   //Bagian musik
 
   static void tambahMusic(String judul, String artis, String durasi, String album) {
-	  
-    music[jumlahMusic][0] = judul;
-    music[jumlahMusic][1] = artis;
-    music[jumlahMusic][2] = durasi;
-    music[jumlahMusic][3] = album;
-    jumlahMusic++;
 
-  }
+	  judul = judul.trim();
+	    artis = artis.trim();
+	    durasi = durasi.trim();
+	    album = album.trim();
+
+	    if (judul.isEmpty()) {
+	        System.out.println("Judul tidak boleh kosong!");
+	        return;
+	    } else if (artis.isEmpty()) {
+	        System.out.println("Artis tidak boleh kosong!");
+	        return;
+	    } else if (durasi.isEmpty()) {
+	        System.out.println("Durasi tidak boleh kosong!");
+	        return;
+	    } else if (album.isEmpty()) {
+	        System.out.println("Album tidak boleh kosong!");
+	        return;
+	    }
+
+	    boolean juduldouble = false;
+	    for (int i = 0; i < jumlahMusic; i++) {
+	        if (music[i][0].equalsIgnoreCase(judul)) {
+	            juduldouble = true;
+	            break;
+	        }
+	    }
+
+	    if (juduldouble) {
+	        System.out.println("Judul yang Anda masukkan sudah ada!");
+	    } else {
+	        if (jumlahMusic < music.length) {
+	            music[jumlahMusic][0] = judul;
+	            music[jumlahMusic][1] = artis;
+	            music[jumlahMusic][2] = durasi;
+	            music[jumlahMusic][3] = album;
+	            jumlahMusic++;
+	            System.out.println("Musik '" + judul + "' berhasil ditambahkan!");
+	        } else {
+	            System.out.println("Penyimpanan musik penuh.");
+	        }
+	    }
+	}
+
+
 
   static void tampilkanMusic() {
     if (jumlahMusic == 0) {
       System.out.println("Belum ada musik");
     } else {
+      System.out.println("\n--- DAFTAR MUSIK ---");
       for (int i = 0; i < jumlahMusic; i++) {
-        System.out.println((i+1)+". "+music[i][0] + "|" + music[i][1] + "|" + music[i][2] + "|" + music[i][3]);
+        System.out.printf("%-3d %-20s %-20s %-7s %-20s\n",
+            (i + 1), music[i][0], music[i][1], music[i][2], music[i][3]);
       }
+      System.out.println("--------------------");
     }
   }
 
@@ -47,18 +87,22 @@ public class musicPlayer {
 		  music[nomorMusic][2]=edit;
 	  }else if(pilihanNomorEdit ==4) {
 		  music[nomorMusic][3]=edit;
-	  }   
+	  }
+	  System.out.println("Data berhasil diubah!");   
   }
 
-  static void hapusDataMusic(int nomorMusic){
-	  for(int i=nomorMusic;i<jumlahMusic-1;i++) {
-		  music[i][0]=music[i+1][0];
-		  music[i][1]=music[i+1][1];
-		  music[i][2]=music[i+1][2];
-		  music[i][3]=music[i+1][3];
-		  
-	  }
-	  jumlahMusic--;
+  static void hapusDataMusic(int nomorMusic) {
+    String judulHapus = music[nomorMusic][0];
+    for (int i = nomorMusic; i < jumlahMusic - 1; i++) {
+    	music[jumlahMusic - 1][0] = null;
+        music[jumlahMusic - 1][1] = null;
+        music[jumlahMusic - 1][2] = null;
+        music[jumlahMusic - 1][3] = null;
+
+    }
+    
+    jumlahMusic--;
+    System.out.println("Musik '" + judulHapus + "' berhasil dihapus!");
   }
 
   // Bagian Playlist
