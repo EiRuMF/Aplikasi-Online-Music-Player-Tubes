@@ -11,6 +11,8 @@ public class musicPlayer {
   static String playlist[] = new String[10];
   static int banyakPlaylist = 0;
 
+  static int playCount [] = new int [1000];
+
   static void tambahMusic(String judul, String artis, String durasi, String album) {
 
 	    judul = judul.trim();
@@ -94,7 +96,7 @@ public class musicPlayer {
         return;
     }
 
-      if(pilihanNomorEdit == 1) {
+    if(pilihanNomorEdit == 1) {
         for(int i = 0; i < jumlahMusic; i++) {
             if(i != nomorMusic && music[i][0].equalsIgnoreCase(edit)) {
                 System.out.println("Judul yang Anda masukkan sudah ada!");
@@ -189,6 +191,8 @@ public class musicPlayer {
 
   static void play(int nomorMusic) {
     if (nomorMusic >= 0 && nomorMusic < jumlahMusic) {
+      playCount[nomorMusic]++;
+
       System.out.println("\n\t SEDANG DIPUTAR ");
       System.out.println("Judul: " + music[nomorMusic][0]);
       System.out.println("Artis: " + music[nomorMusic][1]);
@@ -220,21 +224,29 @@ public class musicPlayer {
 
   static void rekomendasiMusic() {
     if (jumlahMusic == 0) {
-      System.out.println("Tidak ada musik untuk direkomendasikan.");
-      return;
+        System.out.println("Tidak ada musik untuk direkomendasikan.");
+        return;
     }
 
-    Random random = new Random();
-    int indeksAcak = random.nextInt(jumlahMusic);
+    int maxPlay = 0;
+    int indexRekomendasi = 0;
+
+    for (int i = 0; i < jumlahMusic; i++) {
+        if (playCount[i] > maxPlay) {
+            maxPlay = playCount[i];
+            indexRekomendasi = i;
+        }
+    }
 
     System.out.println("\n\t REKOMENDASI MUSIK HARI INI ");
-    System.out.println("Kami merekomendasikan: ");
-    System.out.println("Judul: " + music[indeksAcak][0]);
-    System.out.println("Artis: " + music[indeksAcak][1]);
-    System.out.println("Durasi: " + music[indeksAcak][2]);
-    System.out.println("Album: " + music[indeksAcak][3]);
+    System.out.println("Berdasarkan musik yang sering Anda putar:");
+    System.out.println("Judul : " + music[indexRekomendasi][0]);
+    System.out.println("Artis : " + music[indexRekomendasi][1]);
+    System.out.println("Durasi: " + music[indexRekomendasi][2]);
+    System.out.println("Album : " + music[indexRekomendasi][3]);
     System.out.println("------------------------------------");
-  }
+}
+
 
   public static void main(String[] args) {
 
