@@ -47,7 +47,7 @@ public class musicPlayer {
 	        }
 	    }
 
-	    if (juduldouble) {
+	    if (juduldouble) {                                                                  
 	        System.out.println("Judul yang Anda masukkan sudah ada!");
 	    } else {
 	        if (jumlahMusic < music.length) {
@@ -239,7 +239,40 @@ public class musicPlayer {
     input.nextLine();
 }
 
-  
+ static void lihatIsiPlaylist() {
+
+    if (banyakPlaylist == 0) {
+        System.out.println("Belum ada playlist");
+        return;
+    }
+
+    tampilkanPlaylist();
+    System.out.print("Pilih playlist: ");
+    int p = input.nextInt() - 1;
+
+    if (p < 0 || p >= banyakPlaylist) {
+        System.out.println("Playlist tidak valid");
+        input.nextLine();
+        return;
+    }
+
+    if (jumlahMusicPlaylist[p] == 0) {
+        System.out.println("Playlist masih kosong");
+        input.nextLine();
+        return;
+    }
+
+    System.out.println("Isi playlist \"" + playlist[p] + "\":");
+
+    for (int i = 0; i < jumlahMusicPlaylist[p]; i++) {
+        int idx = playlistMusic[p][i];
+        System.out.println((i + 1) + ". " +
+            music[idx][0] + " - " + music[idx][1]);
+    }
+
+    input.nextLine();
+}
+
   
 
   //static void hapusDataPlaylist(String tambahPlaylist) {
