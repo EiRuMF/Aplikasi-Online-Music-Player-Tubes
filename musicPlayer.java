@@ -343,6 +343,7 @@ static void hapusPlaylist() {
 
 	    Random random = new Random();
 	    int indeksAcak = random.nextInt(jumlahMusic);
+      playCount[indeksAcak]++;
 
 	    System.out.println("\n\t SHUFFLE PLAY ");
 	    System.out.println("\t MEMUTAR SECARA ACAK ");
