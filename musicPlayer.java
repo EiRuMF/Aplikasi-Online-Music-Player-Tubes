@@ -143,11 +143,26 @@ public class musicPlayer {
 
   static void tambahPlaylist() {
     if (banyakPlaylist >= 10) {
-      System.out.println("Playlist Penuh");
-      return;
+        System.out.println("Playlist Penuh");
+        return;
     } else {
+      
       System.out.println("Masukkan nama playlist: ");
       String nama = input.nextLine();
+
+      
+    if (nama.isEmpty()) {
+        System.out.println("Nama playlist tidak boleh kosong!");
+        return;
+    }
+
+    
+    for (int i = 0; i < banyakPlaylist; i++) {
+        if (playlist[i].equalsIgnoreCase(nama)) {
+            System.out.println("Playlist dengan nama tersebut sudah ada!");
+            return;
+        }
+    }
 
       playlist[banyakPlaylist] = nama;
       banyakPlaylist++;
@@ -162,13 +177,24 @@ public class musicPlayer {
       return;
     }
 
-    for(int i = 0; i < banyakPlaylist; i++){
-      System.out.println((i + 1) + ". " + playlist[i] +
-      "(" + jumlahMusicPlaylist[i] + " lagu)");
-    }
-  }
+    
+    System.out.println("\n--- DAFTAR PLAYLIST ---");
+    System.out.printf("%-3s %-25s %-20s\n", "No", "Nama", "Lagu");
+    System.out.println("--------------------------------------------------");
 
-  static void tambahMusicKePlaylist() {
+    for (int i = 0; i < banyakPlaylist; i++) {
+        System.out.printf(
+            "%-3d %-25s %-20s\n",
+            (i + 1),
+            playlist[i],
+            "[" + jumlahMusicPlaylist[i] + " lagu]"
+        );
+    }
+
+    System.out.println("--------------------------------------------------");
+}
+
+static void tambahMusicKePlaylist() {
 
     if (banyakPlaylist == 0) {
         System.out.println("Belum ada playlist");
@@ -200,7 +226,15 @@ public class musicPlayer {
         return;
     }
 
-      playlistMusic[p][jumlahMusicPlaylist[p]] = m;
+    for (int i = 0; i < jumlahMusicPlaylist[p]; i++) {
+        if (playlistMusic[p][i] == m) {
+            System.out.println("Musik sudah ada di playlist ini!");
+            input.nextLine();
+            return;
+        }
+    }
+
+    playlistMusic[p][jumlahMusicPlaylist[p]] = m;
     jumlahMusicPlaylist[p]++;
 
     input.nextLine();
@@ -209,7 +243,7 @@ public class musicPlayer {
 
     
 
-  static void lihatIsiPlaylist() {
+    static void lihatIsiPlaylist() {
 
     if (banyakPlaylist == 0) {
         System.out.println("Belum ada playlist");
@@ -234,11 +268,19 @@ public class musicPlayer {
 
     System.out.println("Isi playlist \"" + playlist[p] + "\":");
 
+    System.out.println("\n--- DAFTAR MUSIK DI PLAYLIST ---");
+		System.out.printf("%-3s %-25s %-20s %-10s %-25s\n", "No", "Judul", "Artis", "Durasi", "Album");
+		System.out.println("---------------------------------------------------------------------");
     for (int i = 0; i < jumlahMusicPlaylist[p]; i++) {
         int idx = playlistMusic[p][i];
-        System.out.println((i + 1) + ". " +
-            music[idx][0] + " -- " + music[idx][1] + " -- " + music[idx][2] + " -- " + music[idx][3]);
+
+           
+		    System.out.printf("%-3d %-25s %-20s %-10s %-25s\n",
+        (i + 1),  music[idx][0], music[idx][1], music[idx][2], music[idx][3]);      
+          
     }
+
+     System.out.println("---------------------------------------------------------------------");
 
     input.nextLine();
 }
@@ -343,7 +385,7 @@ static void hapusPlaylist() {
 
 	    Random random = new Random();
 	    int indeksAcak = random.nextInt(jumlahMusic);
-
+      playCount[indeksAcak]++;
 	    System.out.println("\n\t SHUFFLE PLAY ");
 	    System.out.println("\t MEMUTAR SECARA ACAK ");
 	    System.out.println("Judul: " + music[indeksAcak][0]);
