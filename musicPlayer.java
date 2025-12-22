@@ -96,7 +96,7 @@ public class musicPlayer {
   static void hapusDataMusic(int nomorMusic) {
     String judulHapus = music[nomorMusic][0];
     for (int i = nomorMusic; i < jumlahMusic - 1; i++) {
-    	  music[i][0]=music[i+1][0];
+    	music[i][0]=music[i+1][0];
 		  music[i][1]=music[i+1][1];
 		  music[i][2]=music[i+1][2];
 		  music[i][3]=music[i+1][3];
@@ -175,7 +175,9 @@ public class musicPlayer {
     System.out.println("Musik berhasil ditambahkan ke playlist");
     }
 
-    static void lihatIsiPlaylist() {
+    
+
+  static void lihatIsiPlaylist() {
 
     if (banyakPlaylist == 0) {
         System.out.println("Belum ada playlist");
@@ -203,13 +205,13 @@ public class musicPlayer {
     for (int i = 0; i < jumlahMusicPlaylist[p]; i++) {
         int idx = playlistMusic[p][i];
         System.out.println((i + 1) + ". " +
-            music[idx][0] + " - " + music[idx][1]);
+            music[idx][0] + " -- " + music[idx][1] + " -- " + music[idx][2] + " -- " + music[idx][3]);
     }
 
     input.nextLine();
 }
 
- static void lihatIsiPlaylist() {
+static void hapusPlaylist() {
 
     if (banyakPlaylist == 0) {
         System.out.println("Belum ada playlist");
@@ -217,31 +219,40 @@ public class musicPlayer {
     }
 
     tampilkanPlaylist();
-    System.out.print("Pilih playlist: ");
+    System.out.print("Pilih playlist yang ingin dihapus: ");
     int p = input.nextInt() - 1;
+    input.nextLine();
 
     if (p < 0 || p >= banyakPlaylist) {
         System.out.println("Playlist tidak valid");
-        input.nextLine();
         return;
     }
 
-    if (jumlahMusicPlaylist[p] == 0) {
-        System.out.println("Playlist masih kosong");
-        input.nextLine();
-        return;
+    String namaHapus = playlist[p];
+
+    // Geser playlist
+    for (int i = p; i < banyakPlaylist - 1; i++) {
+        playlist[i] = playlist[i + 1];
+        jumlahMusicPlaylist[i] = jumlahMusicPlaylist[i + 1];
+
+        for (int j = 0; j < 50; j++) {
+            playlistMusic[i][j] = playlistMusic[i + 1][j];
+        }
     }
 
-    System.out.println("Isi playlist \"" + playlist[p] + "\":");
+    // Bersihkan data terakhir (opsional tapi rapi)
+    playlist[banyakPlaylist - 1] = null;
+    jumlahMusicPlaylist[banyakPlaylist - 1] = 0;
 
-    for (int i = 0; i < jumlahMusicPlaylist[p]; i++) {
-        int idx = playlistMusic[p][i];
-        System.out.println((i + 1) + ". " +
-            music[idx][0] + " - " + music[idx][1]);
+    for (int j = 0; j < 50; j++) {
+        playlistMusic[banyakPlaylist - 1][j] = 0;
     }
 
-    input.nextLine();
+    banyakPlaylist--;
+
+    System.out.println("Playlist \"" + namaHapus + "\" berhasil dihapus!");
 }
+
 
   
 
@@ -302,6 +313,7 @@ public class musicPlayer {
         System.out.println("7. Tampilkan playlist");
         System.out.println("8. Tambah music ke playlist ");
         System.out.println("9. Lihat isi playlist ");
+        System.out.println("10. Hapus playlist ");
 	      pilihan = input.nextInt();
 	      input.nextLine();
 	      
@@ -360,6 +372,10 @@ public class musicPlayer {
           tampilkanPlaylist();
         } else if (pilihan == 8) {
           tambahMusicKePlaylist();
+        } else if (pilihan == 9) {
+          lihatIsiPlaylist();
+        } else if (pilihan == 10) {
+          hapusPlaylist();
         }
 	        
 	    } while (pilihan !=0);
