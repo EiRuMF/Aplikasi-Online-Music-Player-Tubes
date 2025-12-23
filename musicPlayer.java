@@ -243,9 +243,7 @@ static void tambahMusicKePlaylist() {
 
     
 
-    
-
-  static void lihatIsiPlaylist() {
+    static void lihatIsiPlaylist() {
 
     if (banyakPlaylist == 0) {
         System.out.println("Belum ada playlist");
@@ -275,9 +273,14 @@ static void tambahMusicKePlaylist() {
 		System.out.println("---------------------------------------------------------------------");
     for (int i = 0; i < jumlahMusicPlaylist[p]; i++) {
         int idx = playlistMusic[p][i];
-        System.out.println((i + 1) + ". " +
-            music[idx][0] + " - " + music[idx][1]);
+
+           
+		    System.out.printf("%-3d %-25s %-20s %-10s %-25s\n",
+        (i + 1),  music[idx][0], music[idx][1], music[idx][2], music[idx][3]);      
+          
     }
+
+     System.out.println("---------------------------------------------------------------------");
 
     input.nextLine();
 }
@@ -354,19 +357,68 @@ static void hapusPlaylist() {
 	      }
 	    }
 
-  //   if (!ditemukan) {
-  //     System.out.println("Musik dengan kata kunci '" + keyword + "' tidak ditemukan.");
-  //   }
-  // }
+	    if (!ditemukan) {
+	      System.out.println("Musik dengan kata kunci '" + keyword + "' tidak ditemukan.");
+	    }
+	  }
   
-  // static void play(String music){
-  // }
+  static void play(int nomorMusic) {
+	    if (nomorMusic >= 0 && nomorMusic < jumlahMusic) {
+	      playCount[nomorMusic]++;
 
-  // static void shufflePlay(String rekomendasi){
-  // }
+	      System.out.println("\n\t SEDANG DIPUTAR ");
+	      System.out.println("Judul: " + music[nomorMusic][0]);
+	      System.out.println("Artis: " + music[nomorMusic][1]);
+	      System.out.println("Durasi: " + music[nomorMusic][2]);
+	      System.out.println("Album: " + music[nomorMusic][3]);
+	      System.out.println("------------------------------------");
+	    } else {
+	      System.out.println("Nomor musik tidak valid.");
+	    }
+	  }
 
-  // static void rekomendasiMusic(String tampilkanPlaylist){
-  // }
+  static void shufflePlay() {
+	    if (jumlahMusic == 0) {
+	      System.out.println("Tidak ada musik untuk di-shuffle.");
+	      return;
+	    }
+
+	    Random random = new Random();
+	    int indeksAcak = random.nextInt(jumlahMusic);
+      playCount[indeksAcak]++;
+	    System.out.println("\n\t SHUFFLE PLAY ");
+	    System.out.println("\t MEMUTAR SECARA ACAK ");
+	    System.out.println("Judul: " + music[indeksAcak][0]);
+	    System.out.println("Artis: " + music[indeksAcak][1]);
+	    System.out.println("Durasi: " + music[indeksAcak][2]);
+	    System.out.println("Album: " + music[indeksAcak][3]);
+	    System.out.println("------------------------------------");
+	  }
+
+  static void rekomendasiMusic() {
+	    if (jumlahMusic == 0) {
+	        System.out.println("Tidak ada musik untuk direkomendasikan.");
+	        return;
+	    }
+
+	    int maxPlay = 0;
+	    int indexRekomendasi = 0;
+
+	    for (int i = 0; i < jumlahMusic; i++) {
+	        if (playCount[i] > maxPlay) {
+	            maxPlay = playCount[i];
+	            indexRekomendasi = i;
+	        }
+	    }
+
+	    System.out.println("\n\t REKOMENDASI MUSIK HARI INI ");
+	    System.out.println("Berdasarkan musik yang sering Anda putar:");
+	    System.out.println("Judul : " + music[indexRekomendasi][0]);
+	    System.out.println("Artis : " + music[indexRekomendasi][1]);
+	    System.out.println("Durasi: " + music[indexRekomendasi][2]);
+	    System.out.println("Album : " + music[indexRekomendasi][3]);
+	    System.out.println("------------------------------------");
+	}
   
 
   public static void main(String[] args) {
