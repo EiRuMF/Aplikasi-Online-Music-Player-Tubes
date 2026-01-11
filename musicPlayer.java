@@ -1,16 +1,337 @@
-import java.util.Scanner
+import java.util.Scanner;
 
-public class MusicPlayer{
+public class musicPlayer {
+
+  static String music[][] = new String[1000][4];
+  static Scanner input = new Scanner(System.in);
+
+  // cari musik
+  static int jumlahMusic = 0;
+
+  // PlayList
+  static String playlist[] = new String[10];
+  static int playlistMusic[][] = new int[10][50];
+  static int jumlahMusicPlaylist[] = new int[10];
+  static int banyakPlaylist = 0;
   
-  static void String[] 
 
-  public static void main(string [] args){
-      Scanner in = new Scanner(System.in);
 
-      
+  //Bagian musik
 
-      
+  static void tambahMusic(String judul, String artis, String durasi, String album) {
 
+	  judul = judul.trim();
+	    artis = artis.trim();
+	    durasi = durasi.trim();
+	    album = album.trim();
+
+	    if (judul.isEmpty()) {
+	        System.out.println("Judul tidak boleh kosong!");
+	        return;
+	    } else if (artis.isEmpty()) {
+	        System.out.println("Artis tidak boleh kosong!");
+	        return;
+	    } else if (durasi.isEmpty()) {
+	        System.out.println("Durasi tidak boleh kosong!");
+	        return;
+	    } else if (album.isEmpty()) {
+	        System.out.println("Album tidak boleh kosong!");
+	        return;
+	    }
+
+	    boolean juduldouble = false;
+	    for (int i = 0; i < jumlahMusic; i++) {
+	        if (music[i][0].equalsIgnoreCase(judul)) {
+	            juduldouble = true;
+	            break;
+	        }
+	    }
+
+	    if (juduldouble) {
+	        System.out.println("Judul yang Anda masukkan sudah ada!");
+	    } else {
+	        if (jumlahMusic < music.length) {
+	            music[jumlahMusic][0] = judul;
+	            music[jumlahMusic][1] = artis;
+	            music[jumlahMusic][2] = durasi;
+	            music[jumlahMusic][3] = album;
+	            jumlahMusic++;
+	            System.out.println("Musik '" + judul + "' berhasil ditambahkan!");
+	        } else {
+	            System.out.println("Penyimpanan musik penuh.");
+	        }
+	    }
+	}
+
+
+
+  static void tampilkanMusic() {
+	    if (jumlahMusic == 0) {
+	        System.out.println("Belum ada musik");
+	    } else {
+	        System.out.println("\n--- DAFTAR MUSIK ---");
+	        System.out.printf("%-3s %-25s %-20s %-10s %-25s\n", "No", "Judul", "Artis", "Durasi", "Album");
+	        System.out.println("---------------------------------------------------------------------");
+	        for (int i = 0; i < jumlahMusic; i++) {
+	            System.out.printf("%-3d %-25s %-20s %-10s %-25s\n",
+	                    (i + 1), music[i][0], music[i][1], music[i][2], music[i][3]);
+	        }
+	        System.out.println("---------------------------------------------------------------------");
+	    }
+	}
+
+  static void editDataMusic(int nomorMusic,int pilihanNomorEdit,String edit) {
+	  if(pilihanNomorEdit ==1) {
+		  music[nomorMusic][0]=edit;
+	  }else if(pilihanNomorEdit ==2) {
+		  music[nomorMusic][1]=edit;
+	  }else if(pilihanNomorEdit ==3) {
+		  music[nomorMusic][2]=edit;
+	  }else if(pilihanNomorEdit ==4) {
+		  music[nomorMusic][3]=edit;
+	  }
+	  System.out.println("Data berhasil diubah!");   
+  }
+
+  static void hapusDataMusic(int nomorMusic) {
+    String judulHapus = music[nomorMusic][0];
+    for (int i = nomorMusic; i < jumlahMusic - 1; i++) {
+    	  music[i][0]=music[i+1][0];
+		  music[i][1]=music[i+1][1];
+		  music[i][2]=music[i+1][2];
+		  music[i][3]=music[i+1][3];
+
+    }
+    
+    jumlahMusic--;
+    System.out.println("Musik '" + judulHapus + "' berhasil dihapus!");
+  }
+
+  // Bagian Playlist
+
+  static void tambahPlaylist() {
+    if (banyakPlaylist >= 10) {
+      System.out.println("Playlist Penuh");
+      return;
+    } else {
+      System.out.println("Masukkan nama playlist: ");
+      String nama = input.nextLine();
+
+      playlist[banyakPlaylist] = nama;
+      banyakPlaylist++;
+
+      System.out.println("Playlist \"" + nama + "\" berhasil ditambahkan!\n");
+    }
+  }
+
+  static void tampilkanPlaylist(){
+    if(banyakPlaylist == 0){
+      System.out.println("Tidak ada playlist");
+      return;
+    }
+
+    for(int i = 0; i < banyakPlaylist; i++){
+      System.out.println((i + 1) + ". " + playlist[i] +
+      "(" + jumlahMusicPlaylist[i] + " lagu)");
+    }
+  }
+
+  static void tambahMusicKePlaylist() {
+
+    if (banyakPlaylist == 0) {
+        System.out.println("Belum ada playlist");
+        return;
+    }
+
+    if (jumlahMusic == 0) {
+        System.out.println("Belum ada musik");
+        return;
+    }
+
+    tampilkanPlaylist();
+    System.out.print("Pilih playlist: ");
+    int p = input.nextInt() - 1;
+
+    if (p < 0 || p >= banyakPlaylist) {
+        System.out.println("Playlist tidak valid");
+        input.nextLine();
+        return;
+    }
+
+    tampilkanMusic();
+    System.out.print("Pilih musik: ");
+    int m = input.nextInt() - 1;
+
+    if (m < 0 || m >= jumlahMusic) {
+        System.out.println("Musik tidak valid");
+        input.nextLine();
+        return;
+    }
+
+      playlistMusic[p][jumlahMusicPlaylist[p]] = m;
+    jumlahMusicPlaylist[p]++;
+
+    input.nextLine();
+    System.out.println("Musik berhasil ditambahkan ke playlist");
+    }
+
+    static void lihatIsiPlaylist() {
+
+    if (banyakPlaylist == 0) {
+        System.out.println("Belum ada playlist");
+        return;
+    }
+
+    tampilkanPlaylist();
+    System.out.print("Pilih playlist: ");
+    int p = input.nextInt() - 1;
+
+    if (p < 0 || p >= banyakPlaylist) {
+        System.out.println("Playlist tidak valid");
+        input.nextLine();
+        return;
+    }
+
+    if (jumlahMusicPlaylist[p] == 0) {
+        System.out.println("Playlist masih kosong");
+        input.nextLine();
+        return;
+    }
+
+    System.out.println("Isi playlist \"" + playlist[p] + "\":");
+
+    for (int i = 0; i < jumlahMusicPlaylist[p]; i++) {
+        int idx = playlistMusic[p][i];
+        System.out.println((i + 1) + ". " +
+            music[idx][0] + " - " + music[idx][1]);
+    }
+
+    input.nextLine();
+}
+
+  
+  
+
+  //static void hapusDataPlaylist(String tambahPlaylist) {
+  //}
+
+  // public void cariMusik() {
+  //   System.out.println("\n=== CARI MUSIK (OOP) ===");
+  //   System.out.print("Masukkan kata kunci (judul/artis/album): ");
+
+  //   if (input.hasNextLine()) {
+  //     input.nextLine();
+  //   }
+  //   String keyword = input.nextLine().trim().toLowerCase();
+
+  //   boolean ditemukan = false;
+
+  //   for (int i = 0; i < jumlahMusic; i++) {
+  //     Music m = music[i];
+
+  //     if (m.judul.toLowerCase().contains(keyword) ||
+  //         m.artis.toLowerCase().contains(keyword) ||
+  //         m.album.toLowerCase().contains(keyword)) {
+  //       System.out.println("--- Ditemukan! ---");
+  //       System.out.println((i + 1) + ". " + m.toString());
+  //       ditemukan = true;
+  //     }
+  //   }
+
+  //   if (!ditemukan) {
+  //     System.out.println("Musik dengan kata kunci '" + keyword + "' tidak ditemukan.");
+  //   }
+  // }
+  
+  // static void play(String music){
+  // }
+
+  // static void shufflePlay(String rekomendasi){
+  // }
+
+  // static void rekomendasiMusic(String tampilkanPlaylist){
+  // }
+  
+
+  public static void main(String[] args) {
+
+		int pilihan;
+	    do {
+	      System.out.println("  ");
+	      System.out.println("==ONLINE MUSIC PLAYER==");
+	      System.out.println("0. Keluar");
+	      System.out.println("1. Lihat semua musik");
+	      System.out.println("2. Cari musik");
+	      System.out.println("3. Tambah musik");
+	      System.out.println("4. Edit musik");
+	      System.out.println("5. Hapus musik");
+        System.out.println("6. Tambah playlist");
+        System.out.println("7. Tampilkan playlist");
+        System.out.println("8. Tambah music ke playlist ");
+        System.out.println("9. Lihat isi playlist ");
+	      pilihan = input.nextInt();
+	      input.nextLine();
+	      
+	      if(pilihan ==1) {
+	    	  tampilkanMusic();
+	      }else if(pilihan ==2) {
+	    	  
+	      }else if(pilihan ==3) {
+	    	  System.out.print("Masukkan judul : ");
+	    	  String judul = input.nextLine();
+	    	  System.out.print("Masukkan artis : ");
+	    	  String artis = input.nextLine();
+	    	  System.out.print("Masukkan durasi : ");
+	    	  String durasi = input.nextLine();
+	    	  System.out.print("Masukkan album : ");
+	    	  String album = input.nextLine();
+	    	  tambahMusic(judul, artis, durasi, album);
+	      }else if(pilihan ==4) {
+	    	  tampilkanMusic();
+	    	  System.out.println("Pilih nomor musik : ");
+	    	  int nomorMusic = input.nextInt()-1;
+	    	  if(nomorMusic>=0 && nomorMusic < jumlahMusic) {
+		    	  System.out.println("1. Judul");
+		    	  System.out.println("2. Artis");
+		    	  System.out.println("3. Durasi");
+		    	  System.out.println("4. Album");
+		    	  
+		    	  System.out.println("Pilih yang ingin anda ubah : ");
+		    	  int nomorEdit = input.nextInt();
+		    	  input.nextLine();
+		    	  if(nomorEdit>0 && nomorEdit<=4) {
+			    	  System.out.println("Masukkan perubahan : ");
+			    	  String ubah = input.nextLine();
+			    	  editDataMusic(nomorMusic,nomorEdit , ubah);
+		    	  }else {
+		    		  System.out.println("Pilihan yang Anda masukkan salah");
+		    	  }  
+	    	  }else {
+	    		  System.out.println("Nomor musik yang anda masukkan salah");
+	    	  }
+	      }else if(pilihan ==5) {
+	    	  tampilkanMusic();
+	    	  System.out.println(" ");
+	    	  if(jumlahMusic!=0) {
+		    	  System.out.println("Pilih nomor musik mana yang anda ingin hapus : ");
+			      int nomorMusicHapus = input.nextInt()-1;
+			      if(nomorMusicHapus>=0 && nomorMusicHapus<jumlahMusic) {
+			    	  hapusDataMusic(nomorMusicHapus);
+			      }else {
+			    	  System.out.println("Nomor musik yang Anda masukkan salah");
+			      }
+		      }
+	      } else if(pilihan == 6) {
+          tambahPlaylist();
+        } else if(pilihan == 7) {
+          tampilkanPlaylist();
+        } else if (pilihan == 8) {
+          tambahMusicKePlaylist();
+        }
+	        
+	    } while (pilihan !=0);
+	    
+	      System.out.println("Keluar dari aplikasi");
 
   }
 }
