@@ -68,19 +68,48 @@ public class musicPlayer {
 
 
   static void tampilkanMusic() {
-		    if (jumlahMusic == 0) {
-		        System.out.println("Belum ada musik");
-		    } else {
-		        System.out.println("\n--- DAFTAR MUSIK ---");
-		        System.out.printf("%-3s %-25s %-20s %-10s %-25s\n", "No", "Judul", "Artis", "Durasi", "Album");
-		        System.out.println("---------------------------------------------------------------------");
-		        for (int i = 0; i < jumlahMusic; i++) {
-		            System.out.printf("%-3d %-25s %-20s %-10s %-25s\n",
-		                    (i + 1), music[i][0], music[i][1], music[i][2], music[i][3]);
-		        }
-		        System.out.println("---------------------------------------------------------------------");
-		    }
-		}
+    if (jumlahMusic == 0) {
+        System.out.println("Belum ada musik");
+    } else {
+
+        
+        for (int i = 0; i < jumlahMusic - 1; i++) {
+            for (int j = 0; j < jumlahMusic - i - 1; j++) {
+                if (music[j][0].compareToIgnoreCase(music[j + 1][0]) > 0) {
+
+                    
+                    for (int k = 0; k < 4; k++) {
+                        String temp = music[j][k];
+                        music[j][k] = music[j + 1][k];
+                        music[j + 1][k] = temp;
+                    }
+
+                    
+                    int tempCount = playCount[j];
+                    playCount[j] = playCount[j + 1];
+                    playCount[j + 1] = tempCount;
+                }
+            }
+        }
+        
+
+        
+        System.out.printf("%-3s %-25s %-20s %-10s %-25s\n",
+                "No", "Judul", "Artis", "Durasi", "Album");
+        System.out.println("---------------------------------------------------------------------");
+
+        for (int i = 0; i < jumlahMusic; i++) {
+            System.out.printf("%-3d %-25s %-20s %-10s %-25s\n",
+                    (i + 1),
+                    music[i][0],
+                    music[i][1],
+                    music[i][2],
+                    music[i][3]);
+        }
+
+        System.out.println("---------------------------------------------------------------------");
+    }
+}
 
   static void editDataMusic(int nomorMusic,int pilihanNomorEdit,String edit) {
 
