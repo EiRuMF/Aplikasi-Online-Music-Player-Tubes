@@ -93,7 +93,7 @@ public class musicPlayer {
         }
         
 
-        System.out.println("\n--- DAFTAR MUSIK (SORTED A-Z) ---");
+        
         System.out.printf("%-3s %-25s %-20s %-10s %-25s\n",
                 "No", "Judul", "Artis", "Durasi", "Album");
         System.out.println("---------------------------------------------------------------------");
